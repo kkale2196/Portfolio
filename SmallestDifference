@@ -1,0 +1,43 @@
+def smallestDifference(arrayOne, arrayTwo):
+    
+    # Sort Arrays and create pointers
+    arrayOne.sort()
+    arrayTwo.sort()
+    one = 0
+    two = 0
+    smallest_diff = float("inf")
+    while one < len(arrayOne) and two < len(arrayTwo):
+        num1,num2 = arrayOne[one], arrayTwo[two]
+        
+        # Calculate the current smallest abs. diff. and record the pairs
+        # 0 is the smallest possible absolute difference
+        current_diff = abs(num1-num2)
+        if current_diff == 0:
+            return [num1,num2]
+        if current_diff < smallest_diff:
+            smallest_diff = current_diff
+            pair = [num1,num2]
+
+        # Move and individual lists' pointer if it will being abs. diff. closer to 0
+        if num1 > num2:
+            two += 1
+        else:
+            one += 1
+    return pair
+
+
+
+
+Question from AlgoExpert:
+Write a function that takes in two non-empty arrays of integers, finds the pair of numbers (one from each array) whose absolute difference is closest to zero, and returns an array containing these two numbers, 
+with the number from the first array in the first position.
+Note that the absolute difference of two integers is the distance between them on the real number line. For example, the absolute difference of -5 and 5 is 10, and the absolute difference of -5 and -4 is 1.
+You can assume that there will only be one pair of numbers with the smallest difference.
+
+Sample Input
+arrayOne = [-1, 5, 10, 20, 28, 3] 
+array Two = [26, 134, 135, 15, 17]
+
+Sample Output
+[28, 26]
+

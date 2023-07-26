@@ -1,7 +1,11 @@
 class Solution(object):
     def reverseWords(self, s):
+
+        # Remove whitespaces at beginning, end and duplicates
         words_list = s.strip().split()
         words_list.reverse()
+
+        # Join list to string by a space
         reversed_string = ' '.join(words_list)
         return reversed_string
                 

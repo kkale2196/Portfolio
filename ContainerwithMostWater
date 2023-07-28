@@ -1,0 +1,58 @@
+***Beats 99.86% of 2.2M correct sumbmissions in runtime***
+
+
+class Solution(object):
+    def maxArea(self, height):
+        
+        # Set pointers at the beginning and end of the list
+        idxfirst = 0 
+        idxlast = len(height) - 1
+        largest = float('-inf')
+        
+        # The maximum volume of the container depends on the height of the smallest vertical line (value in the list) and the length between the two lines (difference in indicies)
+        # Stop when incidies cross to avoid re-counting
+        while idxfirst < idxlast:
+            length = idxlast - idxfirst
+            first = height[idxfirst]
+            last = height[idxlast]
+
+            # The last value being smaller than the first value means we consider the last value 
+            # Multiply the last value and length and the length and compare against the the current largest value
+            # # Bring last index in to consider a larger value
+            if first > last:
+                if largest < last * length:
+                    largest = last * length
+                idxlast -= 1
+
+            # The first value being smaller or equal than the last value means we consider the first value 
+            # Multiply the first value and the length and compare against the the current largest value
+            # Bring first index in to consider a larger value
+            else:
+                if largest < first * length:
+                    largest = first * length
+                idxfirst += 1
+        return largest
+
+
+Question from LeetCode:
+
+You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+
+Find two lines that together with the x-axis form a container, such that the container contains the most water.
+
+Return the maximum amount of water a container can store.
+
+Notice that you may not slant the container.
+
+ 
+
+Example 1:
+
+
+Input: height = [1,8,6,2,5,4,8,3,7]
+Output: 49
+Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
+Example 2:
+
+Input: height = [1,1]
+Output: 1
